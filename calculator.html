@@ -11,6 +11,14 @@
             inputString = "";
             document.getElementById("output").value = "";
         }
+        function clrScreen2() {
+            if (inputString.indexOf('=')>-1) {                
+                clrScreen();
+                readNum(val);
+                displayNum();
+            }
+            
+        }
         function readNum(val) {
             inputString += val;
             return inputString;
@@ -18,55 +26,17 @@
         function displayNum() {
             document.getElementById("output").value = inputString;
         }
-        function isNumeric(input) {  
-            return typeof input === 'string' && !Number.isNaN(input)
-        }
+
         function evaluateRes() {
-            var res;
-            var num;
-            if (inputString == ""){
-                viewAlert();
-            }
-            for (let i = 0; i < inputString.length; i++) {
-                if (isNumeric(inputString[i])) {
-                    num = inputString[i];
-                    res = Number(num);
-                }
-                else {
-                    switch (inputString[i]) {
-                        case '+':
-                            res += num;
-                            console.log(res);
-
-                            break;
-                        case '-':
-                            res = res - num;
-                            console.log(res);
-
-                            break;
-                        
-                        case 'x':
-                            res = res * num;
-                            console.log(res);
-
-                            break;
-                        
-                        case '÷':
-                            res = res / num;
-                            console.log(res);
-                            break;
-                        
-                    }
-                }
-            }
-            inputString += res;
-            displayNum();
-            return inputString;
+            document.getElementById("output").value = inputString + " = " + eval(inputString);
+            return eval(inputString);
         }
 
         function viewAlert() {
             alert("You didn't enter any operation!");
         }
+
+        
 
         
     </script>
@@ -76,20 +46,20 @@
         <input id="output" type="text" disabled>
 
         <form class="Calculator">        
-            <button id="1" type="button" onclick="readNum(1), displayNum()" >1</button>
-            <button id="2" type="button" onclick="readNum(2), displayNum()" >2</button> 
-            <button id="3" type="button" onclick="readNum(3), displayNum()" >3</button>       
+            <button id="1" type="button" onclick="readNum(1), displayNum(), clrScreen2()" >1</button>
+            <button id="2" type="button" onclick="readNum(2), displayNum(), clrScreen2()" >2</button> 
+            <button id="3" type="button" onclick="readNum(3), displayNum(), clrScreen2()" >3</button>       
             <button id="plus" type="button" onclick="readNum('+'), displayNum()" >+</button>
             <br/>        
-            <button id="4" type="button" onclick="readNum(4), displayNum()" value="4">4</button>
-            <button id="5" type="button" onclick="readNum(5), displayNum()" value="5">5</button>
+            <button id="4" type="button" onclick="readNum(4), displayNum()" >4</button>
+            <button id="5" type="button" onclick="readNum(5), displayNum()" >5</button>
             <button id="6" type="button" onclick="readNum(6), displayNum()" value="6">6</button>        
             <button id="sub" type="button" onclick="readNum('-'), displayNum()" value="-">-</button>
             <br/>
             <button id="7" type="button" onclick="readNum(7), displayNum()" value="7">7</button>
             <button id="8" type="button" onclick="readNum(8), displayNum()" value="8">8</button>
             <button id="9" type="button" onclick="readNum(9), displayNum()" value="9">9</button>
-            <button id="mul" type="button" onclick="readNum('x'), displayNum()" value="x">x</button>
+            <button id="mul" type="button" onclick="readNum('*'), displayNum()" value="x">x</button>
 
             <br/>
             <button id="0" type="button" onclick="readNum(0), displayNum()" value="0">0</button>
